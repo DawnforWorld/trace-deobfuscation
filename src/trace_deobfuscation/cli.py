@@ -42,7 +42,11 @@ def main() -> int:
     # Step 1: Parse
     # ------------------------------------------------------------------
     print(f"[1/5] Parsing trace: {trace_path}")
-    records = parse_trace(str(trace_path))
+    try:
+        records = parse_trace(str(trace_path))
+    except ValueError as e:
+        print(f"Error: {e}", file=sys.stderr)
+        return 1
     print(f"      Parsed {len(records)} records")
 
     if not records:
